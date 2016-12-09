@@ -49,7 +49,7 @@ public class Selecter : MonoBehaviour
 
     private void Rotate()
     {
-        transform.Rotate(new Vector3(X, Y, Z) * Time.deltaTime);
+        cube.transform.Rotate(new Vector3(X, Y, Z) * Time.deltaTime);
     }
 
     private bool CheckInRange(GameObject obj)
@@ -73,7 +73,7 @@ public class Selecter : MonoBehaviour
             if (obj.tag == "tile" || obj.tag == "token" || obj.tag == "deadToken")
             {
                 selectedObject.transform.position = obj.transform.position;
-                MoveToSelelect(selectedObject);
+                MoveToSelected(selectedObject);
             }
         }
     }

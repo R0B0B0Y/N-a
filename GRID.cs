@@ -6,7 +6,7 @@ public class GRID : MonoBehaviour
     
     private int width,height;
 
-    private int[,] grid = new bool[16,16];
+    private int[,] grid = new int[16,16];
 
 	// Use this for initialization
 	void Start ()

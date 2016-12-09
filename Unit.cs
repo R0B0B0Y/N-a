@@ -27,7 +27,7 @@ public abstract class Unit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health < 1) { Distroyer(); }
+        if (health < 1) { Destroyer(); }
 
     }
 

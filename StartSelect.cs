@@ -60,32 +60,28 @@ public class StartSelect : MonoBehaviour
         i1 = index;
         heroOne = LoadHero(i1);
         DisplayHeroInfo(heroOne, textOne);
-        string hero = heros[index];
-        Debug.Log(hero);
+        
     }
     public void indexChangeTwo(int index)
     {
         i2 = index;
         heroTwo = LoadHero(i2);
         DisplayHeroInfo(heroTwo, textTwo);
-        string hero = heros[index];
-        Debug.Log(hero);
+        
     }
     public void indexChangeThree(int index)
     {
         i3 = index;
         heroThree = LoadHero(i3);
         DisplayHeroInfo(heroThree, textThree);
-        string hero = heros[index];
-        Debug.Log(hero);
+        
     }
     public void indexChangeFour(int index)
     {
         i4 = index;
         heroFour = LoadHero(i4);
         DisplayHeroInfo(heroFour, textFour);
-        string hero = heros[index];
-        Debug.Log(hero);
+        
     }
 
     //called when char num change

@@ -87,12 +87,12 @@ public class Turn : MonoBehaviour
         {
             Debug.Log("HerosWin");
         }
-        if (overLordTokens > 4)
+        if (overlordTokens > 4)
         {
             Debug.Log("OverLoardWin");
         }
 
-        toggleTurn();
+        ToggleTurn();
 
         if (herosTurn)
         {
