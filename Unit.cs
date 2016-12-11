@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts;
 
 public abstract class Unit : MonoBehaviour
 {
@@ -12,24 +13,23 @@ public abstract class Unit : MonoBehaviour
     [SerializeField]
     protected int defence;
 
+    private Weapon weapon = new Weapon();
+
     private Vector2 gridPos;
 
     private bool turnTaken;
 
     private int actionNum;
 
+    private int maxHealth, maxSpeed;
+
 	// Use this for initialization
 	void Start ()
     {
+        maxHealth = health;
+        maxSpeed = speed;
         gridPos = this.transform.position;
 	}
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (health < 1) { Destroyer(); }
-
-    }
 
     public virtual string GiveInfo()
     {
@@ -48,5 +48,17 @@ public abstract class Unit : MonoBehaviour
             {
                 this.transform.position = obj.transform.position;
             }
+    }
+
+    public void Deffence(int damage)
+    {
+        int defence = 0;
+        damage = defence - damage;
+        if (health < 1) { Destroyer(); }
+    }
+
+    public void Attack()
+    {
+        
     }
 }

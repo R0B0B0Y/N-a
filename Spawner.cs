@@ -26,9 +26,8 @@ public class Spawner : MonoBehaviour
         heroThree = LoadHero(StartSelect.heroThree);
         heroFour = LoadHero(StartSelect.heroFour);
 
-        SpawnHeros();
-        SpawnMonsters();
-        SpawnTokens();
+        Spawn();
+        
     }
 
     private GameObject LoadHero(GameObject obj)
@@ -43,31 +42,29 @@ public class Spawner : MonoBehaviour
         }
     }
     
-    private void SpawnTokens()
+    private void Spawn()
     {
         Instantiate(token, new Vector3(5, 0, 3), this.transform.rotation);
         Instantiate(token, new Vector3(5, 0, 10), this.transform.rotation);
-
-        if (heroNumber > 2) { Instantiate(token, new Vector3(13, 0, 7), this.transform.rotation); }
-        if (heroNumber > 3) { Instantiate(token, new Vector3(1, 0, 5), this.transform.rotation); }
-    }
-
-    private void SpawnMonsters()
-    {
+        Instantiate(heroOne, new Vector3(11, 0, 2), this.transform.rotation);
+        Instantiate(heroTwo, new Vector3(11, 0, 3), this.transform.rotation);
         Instantiate(goblin, new Vector3(11, 0, 6), this.transform.rotation);
         Instantiate(goblin, new Vector3(11, 0, 7), this.transform.rotation);
-        Instantiate(goblin, new Vector3(12, 0, 6), this.transform.rotation);
-        Instantiate(goblin, new Vector3(12, 0, 7), this.transform.rotation);
 
+        if (heroNumber > 2)
+        {
+            Instantiate(token, new Vector3(13, 0, 7), this.transform.rotation);
+            Instantiate(goblin, new Vector3(12, 0, 6), this.transform.rotation);
+            Instantiate(heroThree, new Vector3(10, 0, 3), this.transform.rotation);
+        }
+        if (heroNumber > 3)
+        {
+            Instantiate(token, new Vector3(1, 0, 5), this.transform.rotation);
+            Instantiate(goblin, new Vector3(12, 0, 7), this.transform.rotation);
+            Instantiate(heroFour, new Vector3(10, 0, 2), this.transform.rotation);
+        }
         Instantiate(mauler, new Vector3(7, 0, 10), this.transform.rotation);
     }
 
-    private void SpawnHeros()
-    {
-        Instantiate(heroOne, new Vector3(11, 0, 2), this.transform.rotation);
-        Instantiate(heroTwo, new Vector3(11, 0, 3), this.transform.rotation);
-
-        if (heroNumber > 2) { Instantiate(heroThree, new Vector3(10, 0, 3), this.transform.rotation); }
-        if (heroNumber > 3) { Instantiate(heroFour, new Vector3(10, 0, 2), this.transform.rotation); }
-    }
+    
 }

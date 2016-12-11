@@ -4,10 +4,12 @@ using UnityEngine.UI;
 
 public class Turn : MonoBehaviour
 {
+    public static GameObject selectedUnit;
+
     public static bool herosTurn = true;
 
     [SerializeField]
-    private GameObject turn, action, heroData;
+    private GameObject turnUI, actionUI, heroDataUI, abilityUI;
 
     [SerializeField]
     private Text errortext, infoText, turnText;
@@ -22,63 +24,70 @@ public class Turn : MonoBehaviour
     {
         herosTurn = true;
         turnText.text = "Heros Turn";
-        heroData.SetActive(false);
-        action.SetActive(false);
+
+        heroDataUI.SetActive(false);
+        actionUI.SetActive(false);
+        abilityUI.SetActive(false);
     }
 
-    void Update ()
+    public void DisplaySelected(GameObject obj)
     {
-        DisplaySelected(Selecter.selectedObject);
-	}
-
-    private void DisplaySelected(GameObject obj)
-    {
-        action.SetActive(false);
+        abilityUI.SetActive(false);
+        actionUI.SetActive(false);
         if (obj)
         {
-            heroData.SetActive(true);
+            heroDataUI.SetActive(true);
             if (obj.tag == "hero")
             {
                 Unit Skripet = obj.GetComponent<Unit>();
                 infoText.text = Skripet.GiveInfo();
-                if (herosTurn) { HeroAction(obj); }
+                if (herosTurn) { actionUI.SetActive(true); }
             }
             if (obj.tag == "monster")
             {
                 Unit Skripet = obj.GetComponent<Unit>();
                 infoText.text = Skripet.GiveInfo();
-                if (!herosTurn) { OverlordAction(obj); }
+                if (!herosTurn) { actionUI.SetActive(true); }
             }
             if (obj.tag == "token")
             {
-                string info = "this is a token";
-                infoText.text = info;
+                infoText.text = "this is a token";
             }
         }
         else
         {
             infoText.text = null;
-            heroData.SetActive(false);
-            
-
+            heroDataUI.SetActive(false);
         }
+    }
+
+    public void DoAction()
+    {
+        GameObject obj = Selecter.selectedObject;
+        selectedUnit = obj;
+        if (herosTurn) { HeroAction(obj); }
+        else { OverlordAction(obj); }
     }
 
     public void OverlordAction(GameObject obj)
     {
-        action.SetActive(true);
-
+        Debug.Log("overlord action");
+        actionUI.SetActive(false);
     }
 
     public void HeroAction(GameObject obj)
     {
-        action.SetActive(true);
-        
+        Debug.Log("hero action");
+        actionUI.SetActive(false);
     }
 
     public void ToggleTurn()
     {
         herosTurn = !herosTurn;
+
+        heroDataUI.SetActive(false);
+        actionUI.SetActive(false);
+        abilityUI.SetActive(false);
     }
 
     public void EndTurn()

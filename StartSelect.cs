@@ -10,19 +10,23 @@ public class StartSelect : MonoBehaviour
     public static GameObject heroOne, heroTwo, heroThree, heroFour ;
 
     [SerializeField]
-    private Dropdown one, two, three, four;
+    private Dropdown dropdownOne, dropdownTwo, dropdownThree, dropdownFour;
 
     [SerializeField]
     private Text textOne, textTwo, textThree, textFour;
 
     [SerializeField]
-    private GameObject Hero1, Hero2, Hero3, Hero4, Hero5, Hero6, Hero7, Hero8;
+    private GameObject hero1, hero2, hero3, hero4, hero5, hero6, hero7, hero8;
 
-    private int i1, i2, i3, i4;
+    List<GameObject> Heros = new List<GameObject>();
+
+    List<string> heros = new List<string>() { "Random", "Ashrian", "Avric Albright", "Grisban the Thirsty", "Jain Fairwood", "Leoric of the Book", "Syndrael", "Tomble Burrowell", "Widow Tarha" };
 
     void Start()
     {
         heroNum = 2;
+
+        LoadHeros();
 
         heroOne = null;
         heroTwo = null;
@@ -34,59 +38,70 @@ public class StartSelect : MonoBehaviour
         DisplayHeroInfo(heroThree, textThree);
         DisplayHeroInfo(heroFour, textFour);
 
-        Populate(one);
-        Populate(two);
-        Populate(three);
-        Populate(four);
+        Populate(dropdownOne);
+        Populate(dropdownTwo);
+        Populate(dropdownThree);
+        Populate(dropdownFour);
     }
+
+    //Heros equals 
+    private void LoadHeros()
+    {
+        Heros.Add(null);
+        Heros.Add(hero1);
+        Heros.Add(hero2);
+        Heros.Add(hero3);
+        Heros.Add(hero4);
+        Heros.Add(hero5);
+        Heros.Add(hero6);
+        Heros.Add(hero7);
+        Heros.Add(hero8);
+    }
+
 
     // this is called on stat game
     public void StartGame()
     {
-        heroOne = RandomHero(i1);
-        heroTwo = RandomHero(i2);
-        heroThree = RandomHero(i3);
-        heroFour = RandomHero(i4);
+        if (!heroOne) { heroOne = RandomHero(); }
+        if (!heroTwo) { heroTwo = RandomHero(); }
+        if (!heroThree) { heroThree = RandomHero(); }
+        if (!heroFour) { heroFour = RandomHero(); }
+        
     }
 
     void Populate(Dropdown dropDown)
     {
-        List<string> heros = new List<string>() { "Random", "Ashrian", "Avric Albright", "Grisban the Thirsty", "Jain Fairwood", "Leoric of the Book", "Syndrael", "Tomble Burrowell", "Widow Tarha" };
         dropDown.AddOptions(heros);
     }
 
     public void indexChangeOne(int index)
     {
-        i1 = index;
-        heroOne = LoadHero(i1);
+        heroOne = Heros[index];
         DisplayHeroInfo(heroOne, textOne);
-        
     }
+
     public void indexChangeTwo(int index)
     {
-        i2 = index;
-        heroTwo = LoadHero(i2);
+        heroTwo = Heros[index];
         DisplayHeroInfo(heroTwo, textTwo);
-        
     }
+
     public void indexChangeThree(int index)
     {
-        i3 = index;
-        heroThree = LoadHero(i3);
+        heroThree = Heros[index];
         DisplayHeroInfo(heroThree, textThree);
-        
     }
+
     public void indexChangeFour(int index)
     {
-        i4 = index;
-        heroFour = LoadHero(i4);
+        heroFour = Heros[index];
         DisplayHeroInfo(heroFour, textFour);
-        
     }
 
     //called when char num change
     public void SetCharNum(int index)
     {
+        Debug.Log(index);
         switch (index)
         {
             case 2:
@@ -115,52 +130,12 @@ public class StartSelect : MonoBehaviour
         }             
     }
 
-    private GameObject RandomHero(int index)
+    private GameObject RandomHero()
     {
-        if(index == 0)
-        {
-            index = Random.Range(1, 9);
-            Debug.Log(index);
-        }
-
-        GameObject obj = LoadHero(index);
+        int index = Random.Range(1, 9);
+        Debug.Log(index);
+        GameObject obj = Heros[index];
+        Debug.Log(obj.name);
         return obj;
     }
-
-    private GameObject LoadHero(int index)
-    {
-        GameObject hero;
-        switch (index)
-        {
-            case 1:
-                hero = Hero1;
-                break;
-            case 2:
-                hero = Hero2;
-                break;
-            case 3:
-                hero = Hero3;
-                break;
-            case 4:
-                hero = Hero4;
-                break;
-            case 5:
-                hero = Hero5;
-                break;
-            case 6:
-                hero = Hero6;
-                break;
-            case 7:
-                hero = Hero7;
-                break;
-            case 8:
-                hero = Hero8;
-                break;
-            default:
-                hero = null;
-                break;
-        }
-        return hero;
-    }
-
 }

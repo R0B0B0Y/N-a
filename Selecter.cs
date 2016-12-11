@@ -8,9 +8,6 @@ public class Selecter : MonoBehaviour
     [SerializeField]
     private GameObject cube;
 
-    [SerializeField]
-    private int X, Y, Z;
-
     private Vector2 move;
 
     void Start()
@@ -33,13 +30,17 @@ public class Selecter : MonoBehaviour
         {
             GameObject hitObject = hitInfo.transform.gameObject;
 
-            if (hitObject)
+            if (hitObject.tag == "tile")
+            {
+                
+            }
 
-                if (Input.GetKeyDown("mouse 0"))
-                {
-                    if (hitObject.tag != "tile") { SelectObject(hitObject); }
-                    else { ClearSelected(); }
-                }
+            if (Input.GetKeyDown("mouse 0"))
+            {
+                if (hitObject.tag != "tile") { SelectObject(hitObject); }
+                else { ClearSelected(); }
+            }
+
             if (Input.GetKeyDown("mouse 1") && selectedObject && CheckInRange(hitObject))
             {
                 MoveTo(hitObject);
@@ -49,7 +50,7 @@ public class Selecter : MonoBehaviour
 
     private void Rotate()
     {
-        cube.transform.Rotate(new Vector3(X, Y, Z) * Time.deltaTime);
+        cube.transform.Rotate(new Vector3(100, 100, 100) * Time.deltaTime);
     }
 
     private bool CheckInRange(GameObject obj)
@@ -90,12 +91,15 @@ public class Selecter : MonoBehaviour
         MoveToSelected(obj);
         selectedObject = obj;
         Debug.Log(obj.name + " is selected");
+        Turn turn = this.GetComponent<Turn>();
+        turn.DisplaySelected(selectedObject);
     }
 
     private void MoveToSelected(GameObject obj)
     {
         cube.SetActive(true);
-        this.transform.position = obj.transform.position;
+        Vector3 location = new Vector3(obj.transform.position.x, 1.5f, obj.transform.position.z);
+        cube.transform.position = location;
         selectedObject = obj;
     }
 }

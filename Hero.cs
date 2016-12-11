@@ -12,10 +12,11 @@ public class Hero : Unit
     [SerializeField]
     private GameObject deadToken;
 
+    private int maxStamina;
     // Use this for initialization
     void Start ()
     {
-	
+        maxStamina = stamina;
 	}
 	
 	// Update is called once per frame
@@ -35,4 +36,13 @@ public class Hero : Unit
         Destroy(gameObject);
         Instantiate(deadToken, this.transform.position, this.transform.rotation);
     }
+
+    public void Skill() { }
+    public void Rest() { }
+    public void Search() { }
+    public void StandUp() { }
+    public void ReviveHero() { }
+    public void OpenCloseDoor() { }
+    public void Special() { }
+
 }
